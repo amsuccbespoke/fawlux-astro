@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXORA CREATIVITY | Social Media Management</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    
+    <style>
+        /* Admin login indicator */
+        .admin-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #FF6B8B, #6C63FF);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            z-index: 9999;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .admin-indicator a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        
+        .admin-indicator.show {
+            display: flex;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        /* CMS loading state */
+        .cms-loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 9998;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .cms-loading.active {
+            display: flex;
+        }
+        
+        .cms-loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #FF6B8B;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    
+    <script>
+        // Netlify Identity initialization
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                        document.location.href = "/admin/";
+                    });
+                } else {
+                    // Show admin indicator if logged in
+                    const indicator = document.createElement('div');
+                    indicator.className = 'admin-indicator show';
+                    indicator.innerHTML = `
+                        <i class="fas fa-user-cog"></i>
+                        <span>Logged in as Admin</span>
+                        <a href="/admin/">Go to CMS</a>
+                        <button onclick="netlifyIdentity.logout()" style="background:none;border:none;color:white;cursor:pointer;margin-left:10px;">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    `;
+                    document.body.appendChild(indicator);
+                }
+            });
+        }
+        
+        // Function to add admin link to navigation
+        function addAdminLink() {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks) {
+                const adminLi = document.createElement('li');
+                adminLi.innerHTML = `
+                    <a href="/admin/" class="admin-nav-link">
+                        <i class="fas fa-cog"></i> Admin
+                    </a>
+                `;
+                navLinks.appendChild(adminLi);
+                
+                // Add styling for admin link
+                const style = document.createElement('style');
+                style.textContent = `
+                    .admin-nav-link {
+                        color: #FF6B8B !important;
+                        font-weight: 600 !important;
+                        background: rgba(255, 107, 139, 0.1);
+                        padding: 5px 15px !important;
+                        border-radius: 20px;
+                        margin-left: 10px;
+                    }
+                    
+                    .admin-nav-link:hover {
+                        background: rgba(255, 107, 139, 0.2) !important;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+        
+        // Show CMS loading state
+        function showCMSLoading() {
+            const loading = document.createElement('div');
+            loading.className = 'cms-loading';
+            loading.id = 'cmsLoading';
+            loading.innerHTML = `
+                <div class="cms-loading-spinner"></div>
+                <p>Loading Content...</p>
+            `;
+            document.body.appendChild(loading);
+            return loading;
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add admin link to navigation
+            addAdminLink();
+            
+            // Check if we're on admin page
+            if (window.location.pathname.includes('/admin/')) {
+                const loading = showCMSLoading();
+                loading.classList.add('active');
+                
+                // Hide loading when CMS is ready
+                setTimeout(() => {
+                    loading.classList.remove('active');
+                    setTimeout(() => loading.remove(), 300);
+                }, 2000);
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">NEXORA CREATIVITY</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Crafting Digital Stories That Connect & Convert</h1>
+                <p class="hero-subtitle">I'm a Social Media Manager passionate about helping brands stand out in the digital space. From strategy and content design to engagement and analytics, I create tailored social media experiences that drive growth, build communities, and spark conversations.</p>
+                <div class="hero-buttons">
+                    <a href="#portfolio" class="btn-primary">View My Work</a>
+                    <a href="#contact" class="btn-secondary">Get in Touch</a>
+                    <a href="/admin/" class="btn-secondary" style="background: rgba(255, 107, 139, 0.1); border-color: #FF6B8B;">
+                        <i class="fas fa-cog"></i> Manage Content
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1611605698335-8b1569810432?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Social Media Management">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">My Specialties</h2>
+            <p class="section-subtitle">Comprehensive social media solutions tailored to your brand</p>
+            <div class="services-grid" id="servicesContainer">
+                <!-- Dynamic content will be loaded here from CMS -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Corporate Videos</h3>
+                    <p>Professional corporate content that enhances brand identity and engages stakeholders.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <h3>YouTube Content</h3>
+                    <p>End-to-end YouTube channel management from strategy to editing and optimization.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Social Media Shorts</h3>
+                    <p>Engaging short-form content for TikTok, Instagram Reels, and YouTube Shorts.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3>Animation & Motion Graphics</h3>
+                    <p>Dynamic animations and motion graphics that make your content stand out.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-subtitle">Recent work that delivered measurable results</p>
+            <div class="portfolio-grid" id="portfolioContainer">
+                <!-- Dynamic content will be loaded here from CMS -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="AI Brands Advertisement">
+                        <div class="portfolio-overlay">
+                            <h3>AI Brands Advertisement</h3>
+                            <p>Complete social media campaign for AI technology brand</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Product Ads">
+                        <div class="portfolio-overlay">
+                            <h3>Product Ads Campaign</h3>
+                            <p>Multi-platform product advertising strategy</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://i.postimg.cc/X7Wnnpjb/F3097BEF-69B6-42B7-9D63-393CA3B46722.jpg" alt="3D Video Editing">
+                        <div class="portfolio-overlay">
+                            <h3>3D & 2D Video Editing</h3>
+                            <p>Advanced video editing with logo design integration</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About My Approach</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I believe in transforming visibility into meaningful impact. Every brand has a unique story, and my mission is to amplify that story across social platforms.</p>
+                    <p>With a blend of strategic thinking and creative execution, I help businesses build authentic connections with their audience, drive engagement, and achieve measurable growth.</p>
+                    <div class="stats">
+                        <div class="stat">
+                            <h3>100+</h3>
+                            <p>Projects Completed</p>
+                        </div>
+                        <div class="stat">
+                            <h3>50+</h3>
+                            <p>Satisfied Clients</p>
+                        </div>
+                        <div class="stat">
+                            <h3>24/7</h3>
+                            <p>Support Available</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Social Media Strategy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Let's Work Together</h2>
+            <p class="section-subtitle">Ready to elevate your social media presence?</p>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>gbadamosiisiaq18@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>08104146885</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Location</h3>
+                            <p>Isamole Health Centre, behind white House Lagos Badagry</p>
+                        </div>
+                    </div>
+                </div>
+                <form id="contactForm" class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <input type="text" placeholder="Subject" required>
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <button type="button" id="whatsappButton" class="btn-primary">Send via WhatsApp <i class="fab fa-whatsapp"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>NEXORA CREATIVITY</h2>
+                    <p>Transforming visibility into meaningful impact</p>
+                </div>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61580001701156" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/nexora_creativity?igsh=dm9tcWloZWdja2F6" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/2348104146885" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.linkedin.com/in/isiaq-gbadamosi-35201b285" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com/@gbadamosiisiaq?si=gzZYfoZUb5lmIkAO" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 NEXORA CREATIVITY. All rights reserved. | 
+                   <a href="https://amsuccstudio.netlify.app" target="_blank" class="developer-link">Developed by AMSUCC Studio</a>
+                </p>
+                <p style="margin-top: 10px; font-size: 0.8rem;">
+                    <a href="/admin/" style="color: #FF6B8B; text-decoration: none;">
+                        <i class="fas fa-cog"></i> Manage Content with Netlify CMS
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    
+    <!-- CMS Content Loader -->
+    <script src="js/cms-loader.js"></script>
+    
+    <script>
+        // WhatsApp Form Redirection
+        document.getElementById('whatsappButton').addEventListener('click', function() {
+            const name = document.querySelector('input[type="text"]').value;
+            const email = document.querySelector('input[type="email"]').value;
+            const subject = document.querySelector('input[placeholder="Subject"]').value;
+            const message = document.querySelector('textarea').value;
+
+            // Validate required fields
+            if (!name || !message) {
+                alert('Please fill in your name and message before sending.');
+                return;
+            }
+
+            // Create WhatsApp message
+            const whatsappMessage = `*New Contact Form Submission*%0A%0A*Name:* ${name}%0A*Email:* ${email || 'Not provided'}%0A*Subject:* ${subject || 'No subject'}%0A%0A*Message:*%0A${message}`;
+
+            // Nigerian phone number format (remove leading 0, add 234)
+            const phoneNumber = '2348104146885'; // From 08104146885
+
+            // Open WhatsApp with pre-filled message
+            window.open(`https://wa.me/${phoneNumber}?text=${whatsappMessage}`, '_blank');
+        });
+
+        // Also update the original form submission to prevent default behavior
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('whatsappButton').click();
+        });
+        
+        // Initialize Netlify Identity
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.init();
+        }
+    </script>
+</body>
+</html>
