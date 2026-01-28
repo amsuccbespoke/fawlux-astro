@@ -3,431 +3,752 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXORA CREATIVITY | Social Media Management</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Aura Fashion | Premium Fashion Brand</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- Netlify Identity Widget -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Admin login indicator */
-        .admin-indicator {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: linear-gradient(45deg, #FF6B8B, #6C63FF);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            z-index: 9999;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            display: none;
-            align-items: center;
-            gap: 10px;
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #f8f8f8;
+            --accent-color: #d4af37;
+            --text-dark: #222222;
+            --text-light: #777777;
+            --white: #ffffff;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 32px;
+            --spacing-lg: 64px;
+            --spacing-xl: 128px;
         }
         
-        .admin-indicator a {
-            color: white;
-            text-decoration: underline;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
             font-weight: 600;
+            line-height: 1.3;
         }
         
-        .admin-indicator.show {
-            display: flex;
-            animation: slideIn 0.3s ease;
+        a {
+            text-decoration: none;
+            color: inherit;
         }
         
-        @keyframes slideIn {
-            from {
-                transform: translateY(100px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
         }
         
-        /* CMS loading state */
-        .cms-loading {
-            display: none;
+        /* Header Styles */
+        header {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.9);
-            z-index: 9998;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
+            width: 100%;
+            background-color: var(--white);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
         }
         
-        .cms-loading.active {
+        .header-container {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-sm) 0;
         }
         
-        .cms-loading-spinner {
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: var(--spacing-md);
+        }
+        
+        nav ul li a {
+            font-weight: 500;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        .header-icons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-icons a {
+            margin-left: var(--spacing-md);
+            font-size: 18px;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: var(--spacing-md);
+        }
+        
+        .hero h1 {
+            font-size: 64px;
+            margin-bottom: var(--spacing-sm);
+            letter-spacing: 2px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: var(--spacing-md);
+            font-weight: 300;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .btn:hover {
+            background-color: var(--white);
+            transform: translateY(-3px);
+        }
+        
+        /* Collections Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            font-size: 36px;
+        }
+        
+        .section-title span {
+            color: var(--accent-color);
+        }
+        
+        .collections {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .collection-item {
+            position: relative;
+            overflow: hidden;
+            height: 500px;
+        }
+        
+        .collection-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .collection-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .collection-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: var(--spacing-md);
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: var(--white);
+        }
+        
+        .collection-info h3 {
+            font-size: 24px;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        /* Featured Products */
+        .featured-products {
+            padding: var(--spacing-xl) 0;
+            background-color: var(--secondary-color);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .product-card {
+            background-color: var(--white);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .product-img {
+            height: 350px;
+            overflow: hidden;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: var(--spacing-md);
+        }
+        
+        .product-info h4 {
+            font-size: 18px;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .product-price {
+            font-weight: 600;
+            color: var(--accent-color);
+            font-size: 18px;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        /* Blog Section */
+        .blog {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .blog-card {
+            background-color: var(--white);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .blog-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .blog-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .blog-card:hover .blog-img img {
+            transform: scale(1.05);
+        }
+        
+        .blog-content {
+            padding: var(--spacing-md);
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .blog-content h4 {
+            font-size: 20px;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: var(--spacing-xl) 0 var(--spacing-md);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .footer-col h4 {
+            font-size: 20px;
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            padding-bottom: var(--spacing-xs);
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        
+        .footer-col p {
+            color: #aaa;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             width: 40px;
             height: 40px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #FF6B8B;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+            background-color: rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
         }
         
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+        }
+        
+        .footer-links li {
+            list-style: none;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: var(--spacing-md);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* CMS Admin Button */
+        .admin-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .admin-btn:hover {
+            background-color: var(--white);
+            transform: translateY(-5px);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                padding: var(--spacing-md);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+            
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: var(--spacing-sm) 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
         }
     </style>
-    
-    <script>
-        // Netlify Identity initialization
-        if (window.netlifyIdentity) {
-            window.netlifyIdentity.on("init", user => {
-                if (!user) {
-                    window.netlifyIdentity.on("login", () => {
-                        document.location.href = "/admin/";
-                    });
-                } else {
-                    // Show admin indicator if logged in
-                    const indicator = document.createElement('div');
-                    indicator.className = 'admin-indicator show';
-                    indicator.innerHTML = `
-                        <i class="fas fa-user-cog"></i>
-                        <span>Logged in as Admin</span>
-                        <a href="/admin/">Go to CMS</a>
-                        <button onclick="netlifyIdentity.logout()" style="background:none;border:none;color:white;cursor:pointer;margin-left:10px;">
-                            <i class="fas fa-sign-out-alt"></i>
-                        </button>
-                    `;
-                    document.body.appendChild(indicator);
-                }
-            });
-        }
-        
-        // Function to add admin link to navigation
-        function addAdminLink() {
-            const navLinks = document.querySelector('.nav-links');
-            if (navLinks) {
-                const adminLi = document.createElement('li');
-                adminLi.innerHTML = `
-                    <a href="/admin/" class="admin-nav-link">
-                        <i class="fas fa-cog"></i> Admin
-                    </a>
-                `;
-                navLinks.appendChild(adminLi);
-                
-                // Add styling for admin link
-                const style = document.createElement('style');
-                style.textContent = `
-                    .admin-nav-link {
-                        color: #FF6B8B !important;
-                        font-weight: 600 !important;
-                        background: rgba(255, 107, 139, 0.1);
-                        padding: 5px 15px !important;
-                        border-radius: 20px;
-                        margin-left: 10px;
-                    }
-                    
-                    .admin-nav-link:hover {
-                        background: rgba(255, 107, 139, 0.2) !important;
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-        }
-        
-        // Show CMS loading state
-        function showCMSLoading() {
-            const loading = document.createElement('div');
-            loading.className = 'cms-loading';
-            loading.id = 'cmsLoading';
-            loading.innerHTML = `
-                <div class="cms-loading-spinner"></div>
-                <p>Loading Content...</p>
-            `;
-            document.body.appendChild(loading);
-            return loading;
-        }
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add admin link to navigation
-            addAdminLink();
-            
-            // Check if we're on admin page
-            if (window.location.pathname.includes('/admin/')) {
-                const loading = showCMSLoading();
-                loading.classList.add('active');
-                
-                // Hide loading when CMS is ready
-                setTimeout(() => {
-                    loading.classList.remove('active');
-                    setTimeout(() => loading.remove(), 300);
-                }, 2000);
-            }
-        });
-    </script>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="#" class="logo">NEXORA CREATIVITY</a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <button class="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </button>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">AURA<span>FASHION</span></a>
+            
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#collections">Collections</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-icons">
+                <a href="#"><i class="fas fa-search"></i></a>
+                <a href="#"><i class="fas fa-shopping-bag"></i></a>
+                <a href="#"><i class="fas fa-user"></i></a>
+                <div class="mobile-menu-btn" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
         </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Crafting Digital Stories That Connect & Convert</h1>
-                <p class="hero-subtitle">I'm a Social Media Manager passionate about helping brands stand out in the digital space. From strategy and content design to engagement and analytics, I create tailored social media experiences that drive growth, build communities, and spark conversations.</p>
-                <div class="hero-buttons">
-                    <a href="#portfolio" class="btn-primary">View My Work</a>
-                    <a href="#contact" class="btn-secondary">Get in Touch</a>
-                    <a href="/admin/" class="btn-secondary" style="background: rgba(255, 107, 139, 0.1); border-color: #FF6B8B;">
-                        <i class="fas fa-cog"></i> Manage Content
-                    </a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1611605698335-8b1569810432?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Social Media Management">
-            </div>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>ELEVATE YOUR STYLE</h1>
+            <p>Discover our exclusive collection of premium fashion, designed for the modern individual who appreciates timeless elegance and contemporary design.</p>
+            <a href="#collections" class="btn">Shop Now</a>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
+    <!-- Collections Section -->
+    <section class="collections" id="collections">
         <div class="container">
-            <h2 class="section-title">My Specialties</h2>
-            <p class="section-subtitle">Comprehensive social media solutions tailored to your brand</p>
-            <div class="services-grid" id="servicesContainer">
-                <!-- Dynamic content will be loaded here from CMS -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <h3>Corporate Videos</h3>
-                    <p>Professional corporate content that enhances brand identity and engages stakeholders.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fab fa-youtube"></i>
-                    </div>
-                    <h3>YouTube Content</h3>
-                    <p>End-to-end YouTube channel management from strategy to editing and optimization.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>Social Media Shorts</h3>
-                    <p>Engaging short-form content for TikTok, Instagram Reels, and YouTube Shorts.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-film"></i>
-                    </div>
-                    <h3>Animation & Motion Graphics</h3>
-                    <p>Dynamic animations and motion graphics that make your content stand out.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <p class="section-subtitle">Recent work that delivered measurable results</p>
-            <div class="portfolio-grid" id="portfolioContainer">
-                <!-- Dynamic content will be loaded here from CMS -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="AI Brands Advertisement">
-                        <div class="portfolio-overlay">
-                            <h3>AI Brands Advertisement</h3>
-                            <p>Complete social media campaign for AI technology brand</p>
-                        </div>
+            <h2 class="section-title">Our <span>Collections</span></h2>
+            <div class="collection-grid">
+                <div class="collection-item">
+                    <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80" alt="Spring Collection">
+                    <div class="collection-info">
+                        <h3>Spring Collection</h3>
+                        <p>Light fabrics and vibrant colors</p>
                     </div>
                 </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Product Ads">
-                        <div class="portfolio-overlay">
-                            <h3>Product Ads Campaign</h3>
-                            <p>Multi-platform product advertising strategy</p>
-                        </div>
+                <div class="collection-item">
+                    <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2067&q=80" alt="Evening Wear">
+                    <div class="collection-info">
+                        <h3>Evening Wear</h3>
+                        <p>Elegance for special occasions</p>
                     </div>
                 </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="https://i.postimg.cc/X7Wnnpjb/F3097BEF-69B6-42B7-9D63-393CA3B46722.jpg" alt="3D Video Editing">
-                        <div class="portfolio-overlay">
-                            <h3>3D & 2D Video Editing</h3>
-                            <p>Advanced video editing with logo design integration</p>
-                        </div>
+                <div class="collection-item">
+                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Casual Style">
+                    <div class="collection-info">
+                        <h3>Casual Style</h3>
+                        <p>Comfort meets fashion</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
+    <!-- Featured Products -->
+    <section class="featured-products" id="products">
         <div class="container">
-            <h2 class="section-title">About My Approach</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>I believe in transforming visibility into meaningful impact. Every brand has a unique story, and my mission is to amplify that story across social platforms.</p>
-                    <p>With a blend of strategic thinking and creative execution, I help businesses build authentic connections with their audience, drive engagement, and achieve measurable growth.</p>
-                    <div class="stats">
-                        <div class="stat">
-                            <h3>100+</h3>
-                            <p>Projects Completed</p>
-                        </div>
-                        <div class="stat">
-                            <h3>50+</h3>
-                            <p>Satisfied Clients</p>
-                        </div>
-                        <div class="stat">
-                            <h3>24/7</h3>
-                            <p>Support Available</p>
-                        </div>
+            <h2 class="section-title">Featured <span>Products</span></h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Classic Blazer">
+                    </div>
+                    <div class="product-info">
+                        <h4>Classic Tailored Blazer</h4>
+                        <p class="product-price">$249.99</p>
+                        <p>Premium wool blend with modern cut</p>
                     </div>
                 </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Social Media Strategy">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1544441893-675973e31985?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Evening Dress">
+                    </div>
+                    <div class="product-info">
+                        <h4>Elegant Evening Dress</h4>
+                        <p class="product-price">$399.99</p>
+                        <p>Silk blend with intricate detailing</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Designer Handbag">
+                    </div>
+                    <div class="product-info">
+                        <h4>Designer Leather Handbag</h4>
+                        <p class="product-price">$459.99</p>
+                        <p>Handcrafted Italian leather</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80" alt="Casual Shirt">
+                    </div>
+                    <div class="product-info">
+                        <h4>Premium Cotton Shirt</h4>
+                        <p class="product-price">$89.99</p>
+                        <p>100% Egyptian cotton</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <!-- Blog Section -->
+    <section class="blog" id="blog">
         <div class="container">
-            <h2 class="section-title">Let's Work Together</h2>
-            <p class="section-subtitle">Ready to elevate your social media presence?</p>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h3>Email</h3>
-                            <p>gbadamosiisiaq18@gmail.com</p>
-                        </div>
+            <h2 class="section-title">Fashion <span>Journal</span></h2>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Sustainable Fashion">
                     </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h3>Phone</h3>
-                            <p>08104146885</p>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> May 15, 2023</span>
+                            <span><i class="far fa-user"></i> Admin</span>
                         </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h3>Location</h3>
-                            <p>Isamole Health Centre, behind white House Lagos Badagry</p>
-                        </div>
+                        <h4>The Rise of Sustainable Fashion</h4>
+                        <p>How conscious consumerism is changing the fashion industry and what brands are doing to adapt.</p>
                     </div>
                 </div>
-                <form id="contactForm" class="contact-form">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <input type="text" placeholder="Subject" required>
-                    <textarea placeholder="Your Message" rows="5" required></textarea>
-                    <button type="button" id="whatsappButton" class="btn-primary">Send via WhatsApp <i class="fab fa-whatsapp"></i></button>
-                </form>
+                <div class="blog-card">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1976&q=80" alt="Seasonal Trends">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> April 28, 2023</span>
+                            <span><i class="far fa-user"></i> Admin</span>
+                        </div>
+                        <h4>Top Fashion Trends for Summer 2023</h4>
+                        <p>From vibrant colors to minimalist designs, discover what's trending this season.</p>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2067&q=80" alt="Style Guide">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> March 10, 2023</span>
+                            <span><i class="far fa-user"></i> Admin</span>
+                        </div>
+                        <h4>How to Build a Capsule Wardrobe</h4>
+                        <p>A practical guide to creating a versatile wardrobe with fewer, higher-quality pieces.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer id="contact">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <h2>NEXORA CREATIVITY</h2>
-                    <p>Transforming visibility into meaningful impact</p>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>AURA<span>FASHION</span></h4>
+                    <p>Premium fashion brand dedicated to timeless elegance and contemporary design. We believe in quality, sustainability, and empowering individual style.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
                 </div>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/profile.php?id=61580001701156" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/nexora_creativity?igsh=dm9tcWloZWdja2F6" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/2348104146885" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://www.linkedin.com/in/isiaq-gbadamosi-35201b285" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://youtube.com/@gbadamosiisiaq?si=gzZYfoZUb5lmIkAO" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#collections">Collections</a></li>
+                        <li><a href="#products">Shop</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#about">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Customer Service</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Fashion Avenue, New York, NY 10001</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@aurafashion.com</p>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 NEXORA CREATIVITY. All rights reserved. | 
-                   <a href="https://amsuccstudio.netlify.app" target="_blank" class="developer-link">Developed by AMSUCC Studio</a>
-                </p>
-                <p style="margin-top: 10px; font-size: 0.8rem;">
-                    <a href="/admin/" style="color: #FF6B8B; text-decoration: none;">
-                        <i class="fas fa-cog"></i> Manage Content with Netlify CMS
-                    </a>
-                </p>
+            <div class="copyright">
+                <p>&copy; 2023 Aura Fashion. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
-    
-    <!-- CMS Content Loader -->
-    <script src="js/cms-loader.js"></script>
-    
+    <!-- Netlify CMS Admin Button -->
+    <a href="/admin/" class="admin-btn">
+        <i class="fas fa-cog"></i> Admin Panel
+    </a>
+
+    <!-- JavaScript for Mobile Menu -->
     <script>
-        // WhatsApp Form Redirection
-        document.getElementById('whatsappButton').addEventListener('click', function() {
-            const name = document.querySelector('input[type="text"]').value;
-            const email = document.querySelector('input[type="email"]').value;
-            const subject = document.querySelector('input[placeholder="Subject"]').value;
-            const message = document.querySelector('textarea').value;
-
-            // Validate required fields
-            if (!name || !message) {
-                alert('Please fill in your name and message before sending.');
-                return;
-            }
-
-            // Create WhatsApp message
-            const whatsappMessage = `*New Contact Form Submission*%0A%0A*Name:* ${name}%0A*Email:* ${email || 'Not provided'}%0A*Subject:* ${subject || 'No subject'}%0A%0A*Message:*%0A${message}`;
-
-            // Nigerian phone number format (remove leading 0, add 234)
-            const phoneNumber = '2348104146885'; // From 08104146885
-
-            // Open WhatsApp with pre-filled message
-            window.open(`https://wa.me/${phoneNumber}?text=${whatsappMessage}`, '_blank');
-        });
-
-        // Also update the original form submission to prevent default behavior
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            document.getElementById('whatsappButton').click();
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        
+        mobileMenuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            mobileMenuToggle.querySelector('i').classList.toggle('fa-bars');
+            mobileMenuToggle.querySelector('i').classList.toggle('fa-times');
         });
         
-        // Initialize Netlify Identity
-        if (window.netlifyIdentity) {
-            window.netlifyIdentity.init();
-        }
+        // Close mobile menu when clicking a link
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                mobileMenuToggle.querySelector('i').classList.add('fa-bars');
+                mobileMenuToggle.querySelector('i').classList.remove('fa-times');
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '5px 0';
+                header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+            } else {
+                header.style.padding = 'var(--spacing-sm) 0';
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+            }
+        });
     </script>
 </body>
 </html>
