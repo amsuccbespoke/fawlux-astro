@@ -1,1 +1,14 @@
-
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Confirm Your Email for Aura Fashion</h2>
+  <p>Click below to confirm and go directly to CMS:</p>
+  <p>
+    <a href="{{ .SiteURL }}/admin/#confirmation_token={{ .Token }}">
+      ✅ Confirm Email & Go to CMS
+    </a>
+  </p>
+  <p><small>Or copy this URL:<br>
+  {{ .SiteURL }}/admin/#confirmation_token={{ .Token }}</small></p>
+</body>
+</html>
